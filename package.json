@@ -1,0 +1,30 @@
+{
+  "private": "true",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "esbuild": "^0.19.4",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "stale-dep": "^0.7.0",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-declaration-strict-value": "^1.9.2",
+    "stylelint-prettier": "^4.0.2"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "fix": "npm-run-all fix:**",
+    "fix:js": "npm run -- lint:js --fix",
+    "fix:css": "npm run -- lint:css --fix",
+    "lint": "npm-run-all lint:**",
+    "lint:js": "stale-dep && eslint 'app/{components,frontend,javascript}/**/*.{js,jsx}'",
+    "lint:css": "stale-dep && stylelint 'app/{components,frontend,assets/stylesheets}/**/*.css'",
+    "postinstall": "stale-dep -u",
+    "start": "bin/dev"
+  }
+}
